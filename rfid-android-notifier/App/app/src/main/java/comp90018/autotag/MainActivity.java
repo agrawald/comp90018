@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mainActivity = this;
-        NotificationsManager.handleNotifications(this, NotificationSettings.SenderID, MyHandler.Class);
+        NotificationsManager.handleNotifications(this, NotificationSettings.SenderID, MyHandler.class);
         registerWithNotificationHubs();
 
 

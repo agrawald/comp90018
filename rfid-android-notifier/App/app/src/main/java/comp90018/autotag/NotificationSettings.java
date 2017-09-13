@@ -5,7 +5,8 @@ package comp90018.autotag;
  */
 
 public class NotificationSettings {
-    public static String SenderID = "";
-    public static String HubName = "rfidNotificationHub";
-    public static String HubListenConnectionString = "Endpoint=sb://rfidnotificationsns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=UJtMa+2kQCo0XuZQ4feEZn+4N4l197bA+UQOaCy+Ja4=";
+    public static String SenderID = "51158287557";
+    public static String HubName = "AutoTAG";
+    public static String HubListenConnectionString =
+            "Endpoint=sb://autotag.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=8WyGVu9swcmkllMZj5yOEaYcGUhrUrKyY4ozzj+/s7U=";
 }
