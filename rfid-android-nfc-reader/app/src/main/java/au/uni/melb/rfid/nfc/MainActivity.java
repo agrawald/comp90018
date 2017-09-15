@@ -1,4 +1,4 @@
-package com.mayi.rfid.nfcrfidreader;
+package au.uni.melb.rfid.nfc;
 
 import android.content.Intent;
 import android.nfc.NfcAdapter;
