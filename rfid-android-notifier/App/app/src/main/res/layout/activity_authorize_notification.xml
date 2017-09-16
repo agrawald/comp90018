@@ -4,36 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comp90018.autotag.authorizeNotification">
+    tools:context="comp90018.autotag.authorizeNotification"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/dismissButton"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
         android:layout_marginTop="180dp"
-        android:layout_marginLeft="95dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/dismissButton"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:text="@string/dismiss"
-        app:layout_constraintLeft_toRightOf="@+id/confirmButton"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="180dp" />
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="89dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/confirmButton"
+        tools:layout_constraintBaseline_creator="1" />
 
     <LinearLayout
-        android:layout_width="328dp"
-        android:layout_height="479dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
 

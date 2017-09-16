@@ -1,7 +1,6 @@
 package comp90018.autotag;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationsManager.handleNotifications(this, NotificationSettings.SenderID, MyHandler.class);
         registerWithNotificationHubs();
 
+        Log.d(TAG, "Welcome to AutoTAG");
 
 //        Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
 //        startActivity(intent);
@@ -92,8 +92,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Toast.makeText(MainActivity.this, notificationMessage, Toast.LENGTH_LONG).show();
-                TextView helloText = (TextView) findViewById(R.id.text_hello);
-                helloText.setText(notificationMessage);
+                TextView notification = (TextView) findViewById(R.id.notificationText);
+                notification.setText(notificationMessage);
+
+
+//                Intent intent = new Intent(MainActivity.this, displayNotification.class);
+//                startActivity(intent);
+//
+//                if (notificationMessage == "display") {
+//                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
+//                    startActivity(displayIntent);
+//                } else if (notificationMessage == "authorize") {
+//                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
+//                    startActivity(authorizeIntent);
+//                }
             }
         });
     }

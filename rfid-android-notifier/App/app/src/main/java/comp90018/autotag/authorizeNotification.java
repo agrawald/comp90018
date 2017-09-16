@@ -1,11 +1,13 @@
 package comp90018.autotag;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class authorizeNotification extends AppCompatActivity {
 
@@ -22,22 +24,42 @@ public class authorizeNotification extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.print("User authorized");
+                // print confirmation
+                Context context = getApplicationContext();
+                CharSequence text = "User authorized";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //send to azure
+                // ... code ...
+
+                // return to main activity
                 Intent intent = new Intent(authorizeNotification.this, MainActivity.class);
                 startActivity(intent);
 
-                // send to azure
             }
         });
 
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.print("User dismissed");
+                // print dismissal
+                Context context = getApplicationContext();
+                CharSequence text = "User dismissed";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //send to azure
+                // ... code ...
+
+                // return to main activity
                 Intent intent = new Intent(authorizeNotification.this, MainActivity.class);
                 startActivity(intent);
 
-                // send to azure
             }
         });
     }
