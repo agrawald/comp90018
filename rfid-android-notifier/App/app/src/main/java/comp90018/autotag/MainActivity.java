@@ -9,6 +9,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.gcm.*;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
         registerWithNotificationHubs();
 
         Log.d(TAG, "Welcome to AutoTAG");
-
-//        Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
-//        startActivity(intent);
 
     }
 
@@ -91,21 +89,19 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, notificationMessage, Toast.LENGTH_LONG).show();
+                Toast toast = Toast.makeText(MainActivity.this, notificationMessage, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0, 180);
+                toast.show();
                 TextView notification = (TextView) findViewById(R.id.notificationText);
                 notification.setText(notificationMessage);
 
-
-//                Intent intent = new Intent(MainActivity.this, displayNotification.class);
-//                startActivity(intent);
-//
-//                if (notificationMessage == "display") {
-//                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
-//                    startActivity(displayIntent);
-//                } else if (notificationMessage == "authorize") {
-//                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
-//                    startActivity(authorizeIntent);
-//                }
+                if (notificationMessage == "display") {
+                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
+                    startActivity(displayIntent);
+                } else if (notificationMessage == "authorize") {
+                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
+                    startActivity(authorizeIntent);
+                }
             }
         });
     }
