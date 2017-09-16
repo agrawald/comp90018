@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NFCRFIDReader</string>
     <string name="explanation">Test</string>
+    <string name="service_title">NFC Recoginization </string>
+    <string name="add_button_text">Add</string>
+    <string name="checkbox_text">Item Text</string>
 </resources>
