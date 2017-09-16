@@ -7,10 +7,15 @@ using Microsoft.Azure.Mobile.Server;
 using nfcConnectionService.DataObjects;
 using nfcConnectionService.Models;
 
+
 namespace nfcConnectionService.Controllers
 {
     public class TodoItemController : TableController<TodoItem>
     {
+       // const string connectionString = "MS_AzureStorageAccountConnectionString";
+        //const string tableName = "TodoItems;
+
+
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
@@ -27,7 +32,7 @@ namespace nfcConnectionService.Controllers
         // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public SingleResult<TodoItem> GetTodoItem(string id)
         {
-            return Lookup(id);
+            return base.Lookup(id);
         }
 
         // PATCH tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959

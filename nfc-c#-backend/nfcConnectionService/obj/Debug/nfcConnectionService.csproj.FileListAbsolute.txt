@@ -117,3 +117,5 @@ C:\Users\oliver\Desktop\nfcConnectionService\obj\Debug\nfcConnectionService.pdb
 C:\Users\oliver\Desktop\nfcConnectionService\obj\Debug\nfcConnectionService.Migrations.initial.resources
 C:\Users\oliver\Desktop\nfcConnectionService\obj\Debug\nfcConnectionService.csproj.GenerateResource.Cache
 C:\Users\oliver\Desktop\nfcConnectionService\obj\Debug\nfcConnectionService.csprojResolveAssemblyReference.cache
+C:\Users\oliver\Desktop\nfcConnectionService\bin\Microsoft.Azure.Mobile.Client.dll
+C:\Users\oliver\Desktop\nfcConnectionService\bin\Microsoft.Azure.Mobile.Client.xml

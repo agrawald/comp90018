@@ -13,7 +13,7 @@ namespace nfcConnectionService.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
+      //      SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
         protected override void Seed(nfcConnectionService.Models.nfcConnectionContext context)
