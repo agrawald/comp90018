@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using nfcConnectionService.DataObjects;
+using System.Data.Entity;
 
 namespace nfcConnectionService.Models
 {
-    public class nfcConnectionContext : DbContext
+    public class NFCConnectionContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -14,7 +15,7 @@ namespace nfcConnectionService.Models
 
         private const string connectionStringName = "Name=MS_TableConnectionString";
 
-        public nfcConnectionContext() : base(connectionStringName)
+        public NFCConnectionContext() : base(connectionStringName)
         {
         } 
 

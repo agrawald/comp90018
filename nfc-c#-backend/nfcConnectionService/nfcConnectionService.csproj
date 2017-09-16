@@ -162,7 +162,7 @@
       <DependentUpon>201709140517341_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\nfcConnectionContext.cs" />
+    <Compile Include="Models\NFCConnectionContext.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

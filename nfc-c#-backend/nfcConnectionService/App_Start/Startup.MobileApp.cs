@@ -27,12 +27,12 @@ namespace nfcConnectionService
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            // Database.SetInitializer(new nfcConnectionInitializer());
-            var migrator = new DbMigrator(new Migrations.Configuration());
+            // Database.SetInitializer(new NFCConnectionInitializer());
+            var migrator = new DbMigrator(new DbMigrationsConfiguration());
             migrator.Update();
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
-            // Database.SetInitializer<nfcConnectionContext>(null);
+            // Database.SetInitializer<NFCConnectionContext>(null);
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
@@ -52,9 +52,9 @@ namespace nfcConnectionService
         }
     }
 
-    public class nfcConnectionInitializer : CreateDatabaseIfNotExists<nfcConnectionContext>
+    public class NFCConnectionInitializer : CreateDatabaseIfNotExists<NFCConnectionContext>
     {
-        protected override void Seed(nfcConnectionContext context)
+        protected override void Seed(NFCConnectionContext context)
         {
             List<TodoItem> todoItems = new List<TodoItem>
             {

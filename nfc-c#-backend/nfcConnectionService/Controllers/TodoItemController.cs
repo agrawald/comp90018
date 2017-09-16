@@ -19,7 +19,7 @@ namespace nfcConnectionService.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            nfcConnectionContext context = new nfcConnectionContext();
+            NFCConnectionContext context = new NFCConnectionContext();
             DomainManager = new EntityDomainManager<TodoItem>(context, Request);
         }
 
