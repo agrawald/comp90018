@@ -4,11 +4,11 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
-using nfcConnectionService.DataObjects;
-using nfcConnectionService.Models;
+using NFCConnectionService.DataObjects;
+using NFCConnectionService.Models;
 
 
-namespace nfcConnectionService.Controllers
+namespace NFCConnectionService.Controllers
 {
     public class TodoItemController : TableController<TodoItem>
     {

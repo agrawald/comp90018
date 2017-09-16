@@ -6,12 +6,12 @@ using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using nfcConnectionService.DataObjects;
-using nfcConnectionService.Models;
+using NFCConnectionService.DataObjects;
+using NFCConnectionService.Models;
 using Owin;
 using System.Data.Entity.Migrations;
 
-namespace nfcConnectionService
+namespace NFCConnectionService
 {
     public partial class Startup
     {

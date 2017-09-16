@@ -1,6 +1,8 @@
-namespace nfcConnectionService.Migrations
+namespace NFCConnectionService.Migrations
 {
     using System.Collections.Generic;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.Migrations;
 
     public partial class initial : DbMigration
     {

@@ -1,10 +1,11 @@
-namespace nfcConnectionService.Migrations
+namespace NFCConnectionService.Migrations
 {
-    using nfcConnectionService.DataObjects;
+    using DataObjects;
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<nfcConnectionService.Models.NFCConnectionContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<NFCConnectionService.Models.NFCConnectionContext>
     {
         public Configuration()
         {
@@ -12,7 +13,7 @@ namespace nfcConnectionService.Migrations
       //      SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
-        protected override void Seed(nfcConnectionService.Models.NFCConnectionContext context)
+        protected override void Seed(NFCConnectionService.Models.NFCConnectionContext context)
         {
             //  This method will be called after migrating to the latest version.
 

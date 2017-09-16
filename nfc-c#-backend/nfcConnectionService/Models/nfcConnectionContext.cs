@@ -1,8 +1,10 @@
 ﻿using System.Linq;
-using nfcConnectionService.DataObjects;
+using NFCConnectionService.DataObjects;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.Azure.Mobile.Server.Tables;
 
-namespace nfcConnectionService.Models
+namespace NFCConnectionService.Models
 {
     public class NFCConnectionContext : DbContext
     {
