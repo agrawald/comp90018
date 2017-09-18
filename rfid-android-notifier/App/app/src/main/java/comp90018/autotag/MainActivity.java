@@ -1,5 +1,7 @@
 package comp90018.autotag;
 
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.gcm.*;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
+
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mainActivity = this;
-        NotificationsManager.handleNotifications(this, NotificationSettings.SenderID, MyHandler.class);
+        NotificationsManager.handleNotifications(this, NotificationSettings.dispSenderID, MyHandler.class);
         registerWithNotificationHubs();
 
         Log.d(TAG, "Welcome to AutoTAG");
@@ -95,13 +99,23 @@ public class MainActivity extends AppCompatActivity {
                 TextView notification = (TextView) findViewById(R.id.notificationText);
                 notification.setText(notificationMessage);
 
-                if (notificationMessage == "display") {
-                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
-                    startActivity(displayIntent);
-                } else if (notificationMessage == "authorize") {
-                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
-                    startActivity(authorizeIntent);
-                }
+
+//                // switch to notification activity on click
+//                Context context = getApplicationContext();
+//                NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(context);
+//
+//                Intent resultIntent = new Intent(context, displayNotification.class);
+//                PendingIntent resultPending =
+//                        PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                mbuilder.setContentIntent(resultPending);
+//
+//                if (notificationMessage == "display") {
+//                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
+//                    startActivity(displayIntent);
+//                } else if (notificationMessage == "authorize") {
+//                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
+//                    startActivity(authorizeIntent);
+//                }
             }
         });
     }
