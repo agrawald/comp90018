@@ -45,13 +45,14 @@ public class MyHandler extends NotificationsHandler {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Notification Hub Demo")
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
+                        .setContentTitle("AutoTAG Notification Hub")
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                         .setSound(defaultSoundUri)
-                        .setContentText(msg);
+                        .setContentText(msg)
+                        .setOngoing(true);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
     }
 }
