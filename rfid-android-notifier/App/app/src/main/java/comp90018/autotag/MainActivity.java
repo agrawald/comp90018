@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private GoogleCloudMessaging gcm;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
+    private String ID = null;
+    private boolean authNeeded = false;
+
     TextView notification;
 
     @Override
@@ -42,18 +45,16 @@ public class MainActivity extends AppCompatActivity {
         notification.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                MyHandler handler = new MyHandler();
-                boolean authNeeded = handler.getAuthNeeded();
-                String ID = handler.getID();
-
-                if (authNeeded) {
-                    Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
-                    intent.putExtra("id", ID);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(MainActivity.this, displayNotification.class);
-                    intent.putExtra("id", ID);
-                    startActivity(intent);
+                if (ID != null){
+                    if (authNeeded) {
+                        Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
+                        intent.putExtra("id", ID);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, displayNotification.class);
+                        intent.putExtra("id", ID);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -123,5 +124,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void setVariables(final String ID, final boolean authNeeded){
+        this.ID = ID;
+        this.authNeeded = authNeeded;
+    }
 
 }

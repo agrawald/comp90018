@@ -36,7 +36,7 @@ public class MyHandler extends NotificationsHandler {
         this.notificationAuth = authNeeded(ctx, bundle);
         String nhMessage;
 
-        if (notificationAuth == true) {
+        if (notificationAuth) {
             nhMessage = "Authorization has been requested by " + notificationID;
         } else {
             nhMessage = notificationID + " has requested access";
@@ -44,6 +44,7 @@ public class MyHandler extends NotificationsHandler {
         sendNotification(nhMessage);
 
         if (MainActivity.isVisible) {
+            MainActivity.mainActivity.setVariables(notificationID,notificationAuth);
             MainActivity.mainActivity.ToastNotify(nhMessage);
         }
     }
