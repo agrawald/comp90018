@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean authNeeded = handler.getAuthNeeded();
                 String ID = handler.getID();
 
-                if (authNeeded == true) {
+                if (authNeeded) {
                     Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
                     intent.putExtra("id", ID);
                     startActivity(intent);
