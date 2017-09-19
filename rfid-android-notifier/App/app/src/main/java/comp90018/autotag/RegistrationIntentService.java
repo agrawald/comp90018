@@ -11,7 +11,9 @@ import com.google.android.gms.iid.InstanceID;
 import com.microsoft.windowsazure.messaging.NotificationHub;
 
 /**
- * Created by Lilian on 13/09/2017.
+ * This class registers the device with Azure Notification Services
+ * and obtains a unique ID to listen for notifications.
+ * Created on 13/09/2017.
  */
 
 public class RegistrationIntentService extends IntentService {

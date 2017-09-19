@@ -14,16 +14,20 @@ import com.microsoft.windowsazure.notifications.NotificationsManager;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     public static MainActivity mainActivity;
     public static Boolean isVisible = false;
     private GoogleCloudMessaging gcm;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String TAG = "MainActivity";
+
+    TextView notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,26 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "Welcome to AutoTAG");
 
+        notification = (TextView) findViewById(R.id.notificationText);
+
+        notification.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                MyHandler handler = new MyHandler();
+                boolean authNeeded = handler.getAuthNeeded();
+                String ID = handler.getID();
+
+                if (authNeeded == true) {
+                    Intent intent = new Intent(MainActivity.this, authorizeNotification.class);
+                    intent.putExtra("id", ID);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(MainActivity.this, displayNotification.class);
+                    intent.putExtra("id", ID);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private boolean checkPlayServices() {
@@ -98,24 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
                 TextView notification = (TextView) findViewById(R.id.notificationText);
                 notification.setText(notificationMessage);
-
-
-//                // switch to notification activity on click
-//                Context context = getApplicationContext();
-//                NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(context);
-//
-//                Intent resultIntent = new Intent(context, displayNotification.class);
-//                PendingIntent resultPending =
-//                        PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//                mbuilder.setContentIntent(resultPending);
-//
-//                if (notificationMessage == "display") {
-//                    Intent displayIntent = new Intent(MainActivity.this, displayNotification.class);
-//                    startActivity(displayIntent);
-//                } else if (notificationMessage == "authorize") {
-//                    Intent authorizeIntent = new Intent (MainActivity.this, authorizeNotification.class);
-//                    startActivity(authorizeIntent);
-//                }
             }
         });
     }

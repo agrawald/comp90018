@@ -1,7 +1,9 @@
 package comp90018.autotag;
 
 /**
- * Created by Lilian on 12/09/2017.
+ * This class stores the notification settings of the GCM and Azure
+ * Notification Hub configurations
+ * Created on 12/09/2017.
  */
 
 // Connection IDs
