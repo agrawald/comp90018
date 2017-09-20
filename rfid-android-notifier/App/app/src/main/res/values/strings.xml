@@ -7,4 +7,5 @@
     <string name="displayText">Access has been requested by a registered user:</string>
     <string name="ok">OK</string>
     <string name="start">Welcome to AutoTAG!</string>
+    <string name="checkbox_text">Item Text</string>
 </resources>

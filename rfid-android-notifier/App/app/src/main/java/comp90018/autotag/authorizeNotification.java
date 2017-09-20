@@ -16,6 +16,8 @@ public class authorizeNotification extends AppCompatActivity {
 
     private static final String TAG = "authorizeNotification";
 
+    private boolean authorized;
+
     Button confirm;
     Button deny;
 
@@ -45,7 +47,7 @@ public class authorizeNotification extends AppCompatActivity {
                 toast.show();
 
                 //send to azure
-                // ... code ...
+                authorized = true;
 
                 // return to main activity
                 Intent intent = new Intent(authorizeNotification.this, MainActivity.class);
@@ -67,7 +69,7 @@ public class authorizeNotification extends AppCompatActivity {
                 toast.show();
 
                 //send to azure
-                // ... code ...
+                authorized = false;
 
                 // return to main activity
                 Intent intent = new Intent(authorizeNotification.this, MainActivity.class);
