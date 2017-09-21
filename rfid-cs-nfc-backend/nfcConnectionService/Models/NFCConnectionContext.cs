@@ -1,12 +1,13 @@
-﻿using System.Linq;
-using NFCConnectionService.DataObjects;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
+using nfcConnectionService.DataObjects;
 
-namespace NFCConnectionService.Models
+namespace nfcConnectionService.Models
 {
-    public class NFCConnectionContext : DbContext
+    public class nfcConnectionContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -17,11 +18,11 @@ namespace NFCConnectionService.Models
 
         private const string connectionStringName = "Name=MS_TableConnectionString";
 
-        public NFCConnectionContext() : base(connectionStringName)
+        public nfcConnectionContext() : base(connectionStringName)
         {
-        } 
+        }  
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<AutoTag> AutoTags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

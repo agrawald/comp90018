@@ -6,12 +6,12 @@ using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using NFCConnectionService.DataObjects;
-using NFCConnectionService.Models;
+using nfcConnectionService.DataObjects;
+using nfcConnectionService.Models;
 using Owin;
 using System.Data.Entity.Migrations;
 
-namespace NFCConnectionService
+namespace nfcConnectionService
 {
     public partial class Startup
     {
@@ -27,12 +27,12 @@ namespace NFCConnectionService
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            // Database.SetInitializer(new NFCConnectionInitializer());
-            var migrator = new DbMigrator(new DbMigrationsConfiguration());
+            // Database.SetInitializer(new nfcConnectionInitializer());
+            var migrator = new DbMigrator(new Migrations.Configuration());
             migrator.Update();
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
-            // Database.SetInitializer<NFCConnectionContext>(null);
+            // Database.SetInitializer<nfcConnectionContext>(null);
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
@@ -52,19 +52,19 @@ namespace NFCConnectionService
         }
     }
 
-    public class NFCConnectionInitializer : CreateDatabaseIfNotExists<NFCConnectionContext>
+    public class nfcConnectionInitializer : CreateDatabaseIfNotExists<nfcConnectionContext>
     {
-        protected override void Seed(NFCConnectionContext context)
+        protected override void Seed(nfcConnectionContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+           List<AutoTag> autoTags = new List<AutoTag>
             {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+                new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
+                new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (AutoTag autoTag in autoTags)
             {
-                context.Set<TodoItem>().Add(todoItem);
+               context.Set<AutoTag>().Add(autoTag);
             }
 
             base.Seed(context);
