@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using NFCConnectionService.DataObjects;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
+using nfcConnectionService.DataObjects;
 
 namespace NFCConnectionService.Models
 {
@@ -19,9 +20,9 @@ namespace NFCConnectionService.Models
 
         public NFCConnectionContext() : base(connectionStringName)
         {
-        } 
+        }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<AutoTag> AutoTags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

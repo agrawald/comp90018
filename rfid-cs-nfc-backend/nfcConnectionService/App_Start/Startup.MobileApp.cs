@@ -56,15 +56,15 @@ namespace NFCConnectionService
     {
         protected override void Seed(NFCConnectionContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+           List<AutoTag> autoTags = new List<AutoTag>
             {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+                new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
+                new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (AutoTag autoTag in autoTags)
             {
-                context.Set<TodoItem>().Add(todoItem);
+               context.Set<AutoTag>().Add(autoTag);
             }
 
             base.Seed(context);

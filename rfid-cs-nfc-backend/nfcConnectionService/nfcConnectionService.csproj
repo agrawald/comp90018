@@ -190,12 +190,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
-    <Compile Include="Migrations\201709140517341_initial.cs" />
-    <Compile Include="Migrations\201709140517341_initial.Designer.cs">
-      <DependentUpon>201709140517341_initial.cs</DependentUpon>
+    <Compile Include="Controllers\AutoTagController.cs" />
+    <Compile Include="DataObjects\AutoTag.cs" />
+    <Compile Include="Migrations\201709201038256_Initial.cs" />
+    <Compile Include="Migrations\201709201038256_Initial.Designer.cs">
+      <DependentUpon>201709201038256_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NFCConnectionContext.cs" />
@@ -220,8 +219,8 @@
     <None Include="Properties\PublishProfiles\nfcConnection - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709140517341_initial.resx">
-      <DependentUpon>201709140517341_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709201038256_Initial.resx">
+      <DependentUpon>201709201038256_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

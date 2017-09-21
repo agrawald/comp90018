@@ -1,16 +1,19 @@
 namespace NFCConnectionService.Migrations
 {
-    using DataObjects;
+    using Microsoft.Azure.Mobile.Server.Tables;
+    using nfcConnectionService.DataObjects;
     using System;
+    using System.Data.Entity;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<NFCConnectionService.Models.NFCConnectionContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-      //      SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
+           // SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
         protected override void Seed(NFCConnectionService.Models.NFCConnectionContext context)
@@ -28,24 +31,18 @@ namespace NFCConnectionService.Migrations
             //    );
             //
 
-            //    context.TodoItems.AddOrUpdate(
-           //      p => p.Id,
-            //      new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Andrew Peters", Complete=true }
-             //  );
+             List<AutoTag>  autoTags = new List<AutoTag>
+             {
+                  new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
+                  new AutoTag { Id = Guid.NewGuid().ToString(), Authorized = false },
+              };
 
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
-            };
+             foreach (AutoTag autoTag in  autoTags)
+             {
+                  context.Set<AutoTag>().Add(autoTag);
+              }
 
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
-
-            base.Seed(context);
-
+               base.Seed(context);
         }
     }
 }
