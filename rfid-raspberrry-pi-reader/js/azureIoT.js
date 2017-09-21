@@ -24,7 +24,7 @@ AzureIoT.prototype.sendMessage = function (content) {
     } else {
       console.log('Message sent to Azure IoT Hub');
     }
-  });
+})
 };
 
 AzureIoT.prototype.initClient = function () {
@@ -34,14 +34,14 @@ AzureIoT.prototype.initClient = function () {
   this.client.open((err) => {
     if (err) {
       console.error('[IoT hub Client] Connect error: ' + err.message);
-      return;
+
     }
 
     // set C2D and device method callback
     this.client.onDeviceMethod('start', onStart);
     this.client.onDeviceMethod('stop', onStop);
     this.client.on('message', receiveMessageCallback);
-  });
+})
 };
 
 AzureIoT.prototype.getConnectionString = function () {
@@ -79,7 +79,7 @@ function receiveMessageCallback(msg) {
   let message = msg.getData().toString('utf-8');
   AzureIoTClient.complete(msg, () => {
     console.log('Receive message: ' + message);
-  });
+})
 }
 
 module.exports = AzureIoT;
