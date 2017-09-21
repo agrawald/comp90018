@@ -13,19 +13,15 @@ import android.widget.Toast;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
-import java.util.concurrent.ExecutionException;
-
 public class AutoTagActivity extends AppCompatActivity {
-
+    TextView tvIdInfo;
+    TextView tvTextInfo;
     /**
      * Transfer NCF data into database
      */
     private MobileServiceClient autoTagNFCClient;
     private MobileServiceTable<AutoTag> autoTagTable;
-
     private NfcAdapter nfcAdapter;
-    TextView tvIdInfo;
-    TextView tvTextInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +46,8 @@ public class AutoTagActivity extends AppCompatActivity {
             autoTagNFCClient = new MobileServiceClient(
                     "https://nfcconnection.azurewebsites.net",
                     this);
-            autoTagTable = autoTagNFCClient.getTable("AutoTag",AutoTag.class);
-        }catch( Exception e){
+            autoTagTable = autoTagNFCClient.getTable("AutoTag", AutoTag.class);
+        } catch (Exception e) {
             createAndShowDialog(e, "Error");
         }
         tvIdInfo = (TextView) findViewById(R.id.tvIdToDo);
@@ -75,14 +71,13 @@ public class AutoTagActivity extends AppCompatActivity {
                 tvIdInfo.setText("tag == null");
             } else {
                 int i, j, in;
-                String [] hex = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+                String[] hex = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
                 String tagIdInfo = "";
                 String tagTextInfo = "";
                 byte[] tagId = tag.getId();
                 tagTextInfo += tagId.length;
 
-                for(j = 0 ; j < tagId.length ; ++j)
-                {
+                for (j = 0; j < tagId.length; ++j) {
                     in = (int) tagId[j] & 0xff;
                     i = (in >> 4) & 0x0f;
                     tagIdInfo += hex[i];
@@ -98,11 +93,11 @@ public class AutoTagActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * Add a new item
      *
-     * @param view
-     *            The view that originated the call
+     * @param view The view that originated the call
      */
     public void addItem(View view) {
         if (autoTagNFCClient == null) {
@@ -115,20 +110,19 @@ public class AutoTagActivity extends AppCompatActivity {
         nfcTag.setId(tvIdInfo.getText().toString());
         try {
             autoTagTable.insert(nfcTag).get();
-        }catch( ExecutionException e){
-
-        }catch (InterruptedException e){
-
+        } catch (Exception e) {
+            createAndShowDialog(e, "Error");
         }
     }
 
     private void createAndShowDialog(Exception exception, String title) {
         Throwable ex = exception;
-        if(exception.getCause() != null){
+        if (exception.getCause() != null) {
             ex = exception.getCause();
         }
         createAndShowDialog(ex.getMessage(), title);
     }
+
     private void createAndShowDialog(final String message, final String title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -136,13 +130,12 @@ public class AutoTagActivity extends AppCompatActivity {
         builder.setTitle(title);
         builder.create().show();
     }
+
     /**
      * Creates a dialog and shows it
      *
-     * @param exception
-     *            The exception to show in the dialog
-     * @param title
-     *            The dialog title
+     * @param exception The exception to show in the dialog
+     * @param title     The dialog title
      */
     private void createAndShowDialogFromTask(final Exception exception, String title) {
         runOnUiThread(new Runnable() {
