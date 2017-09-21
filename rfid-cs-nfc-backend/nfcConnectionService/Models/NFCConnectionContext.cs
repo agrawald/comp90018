@@ -5,9 +5,9 @@ using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using nfcConnectionService.DataObjects;
 
-namespace nfcConnectionService.Models
+namespace NFCConnectionService.Models
 {
-    public class nfcConnectionContext : DbContext
+    public class NFCConnectionContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -18,9 +18,9 @@ namespace nfcConnectionService.Models
 
         private const string connectionStringName = "Name=MS_TableConnectionString";
 
-        public nfcConnectionContext() : base(connectionStringName)
+        public NFCConnectionContext() : base(connectionStringName)
         {
-        }  
+        }
 
         public DbSet<AutoTag> AutoTags { get; set; }
 

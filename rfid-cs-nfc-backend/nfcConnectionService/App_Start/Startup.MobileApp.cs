@@ -6,12 +6,12 @@ using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
-using nfcConnectionService.DataObjects;
-using nfcConnectionService.Models;
+using NFCConnectionService.DataObjects;
+using NFCConnectionService.Models;
 using Owin;
 using System.Data.Entity.Migrations;
 
-namespace nfcConnectionService
+namespace NFCConnectionService
 {
     public partial class Startup
     {
@@ -27,12 +27,12 @@ namespace nfcConnectionService
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            // Database.SetInitializer(new nfcConnectionInitializer());
-            var migrator = new DbMigrator(new Migrations.Configuration());
+            // Database.SetInitializer(new NFCConnectionInitializer());
+            var migrator = new DbMigrator(new DbMigrationsConfiguration());
             migrator.Update();
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
-            // Database.SetInitializer<nfcConnectionContext>(null);
+            // Database.SetInitializer<NFCConnectionContext>(null);
 
             MobileAppSettingsDictionary settings = config.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
@@ -52,9 +52,9 @@ namespace nfcConnectionService
         }
     }
 
-    public class nfcConnectionInitializer : CreateDatabaseIfNotExists<nfcConnectionContext>
+    public class NFCConnectionInitializer : CreateDatabaseIfNotExists<NFCConnectionContext>
     {
-        protected override void Seed(nfcConnectionContext context)
+        protected override void Seed(NFCConnectionContext context)
         {
            List<AutoTag> autoTags = new List<AutoTag>
             {

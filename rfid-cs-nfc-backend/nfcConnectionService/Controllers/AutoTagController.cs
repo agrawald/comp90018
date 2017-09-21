@@ -8,7 +8,7 @@ using nfcConnectionService.DataObjects;
 using nfcConnectionService.Models;
 
 
-namespace nfcConnectionService.Controllers
+namespace NFCConnectionService.Controllers
 {
     public class AutoTagController : TableController<AutoTag>
     {

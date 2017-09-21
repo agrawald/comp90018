@@ -1,4 +1,4 @@
-namespace nfcConnectionService.Migrations
+namespace NFCConnectionService.Migrations
 {
     using Microsoft.Azure.Mobile.Server.Tables;
     using nfcConnectionService.DataObjects;
@@ -8,7 +8,7 @@ namespace nfcConnectionService.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<nfcConnectionService.Models.nfcConnectionContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<NFCConnectionService.Models.NFCConnectionContext>
     {
         public Configuration()
         {
@@ -16,7 +16,7 @@ namespace nfcConnectionService.Migrations
            // SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
-        protected override void Seed(nfcConnectionService.Models.nfcConnectionContext context)
+        protected override void Seed(NFCConnectionService.Models.NFCConnectionContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 
-namespace nfcConnectionService.DataObjects
+namespace NFCConnectionService.DataObjects
 {
     public class AutoTag : EntityData
     {

@@ -1,4 +1,4 @@
-namespace nfcConnectionService.Migrations
+namespace NFCConnectionService.Migrations
 {
     using System;
     using System.Collections.Generic;
