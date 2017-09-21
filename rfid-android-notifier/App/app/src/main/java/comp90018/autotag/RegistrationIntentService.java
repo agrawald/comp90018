@@ -11,7 +11,9 @@ import com.google.android.gms.iid.InstanceID;
 import com.microsoft.windowsazure.messaging.NotificationHub;
 
 /**
- * Created by Lilian on 13/09/2017.
+ * This class registers the device with Azure Notification Services
+ * and obtains a unique ID to listen for notifications.
+ * Created on 13/09/2017.
  */
 
 public class RegistrationIntentService extends IntentService {
@@ -32,13 +34,13 @@ public class RegistrationIntentService extends IntentService {
 
         try {
             InstanceID instanceID = InstanceID.getInstance(this);
-            String token = instanceID.getToken(NotificationSettings.SenderID,
+            String token = instanceID.getToken(NotificationSettings.dispSenderID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE);
             Log.i(TAG, "Got GCM Registration Token: " + token);
 
             if ((regID=sharedPreferences.getString("registrationID", null)) == null) {
-                NotificationHub hub = new NotificationHub(NotificationSettings.HubName,
-                        NotificationSettings.HubListenConnectionString, this);
+                NotificationHub hub = new NotificationHub(NotificationSettings.dispHubName,
+                        NotificationSettings.dispHubListenConnectionString, this);
                 Log.i(TAG, "Attempting to register with NH using token: " + token);
                 regID = hub.register(token).getRegistrationId();
 

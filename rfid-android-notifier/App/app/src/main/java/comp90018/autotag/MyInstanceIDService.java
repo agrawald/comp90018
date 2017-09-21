@@ -6,7 +6,8 @@ import com.google.android.gms.iid.InstanceIDListenerService;
 
 
 /**
- * Created by Lilian on 12/09/2017.
+ *
+ * Created on 12/09/2017.
  */
 
 public class MyInstanceIDService extends InstanceIDListenerService {
