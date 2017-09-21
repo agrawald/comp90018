@@ -1,9 +1,9 @@
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(NFCConnectionService.Startup))]
+[assembly: OwinStartup(typeof(nfcConnectionService.Startup))]
 
-namespace NFCConnectionService
+namespace nfcConnectionService
 {
     public partial class Startup
     {
