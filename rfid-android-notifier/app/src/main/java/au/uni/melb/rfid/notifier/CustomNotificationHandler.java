@@ -8,28 +8,44 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.microsoft.windowsazure.notifications.NotificationsHandler;
 
-import au.uni.melb.rfid.notifier.R;
 import au.uni.melb.rfid.notifier.activity.MainActivity;
 
 /**
- * Created by Lilian on 13/09/2017.
+ * This class listens for and handles notifications.
+ * Created on 13/09/2017.
  */
 
 public class CustomNotificationHandler extends NotificationsHandler {
+
+    private static final String TAG = "CustomNotificationHandler";
+
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
-    //NotificationCompat.Builder builder;
     Context ctx;
+
+    private boolean notificationAuth;
+    private String notificationID;
 
     @Override
     public void onReceive(Context context, Bundle bundle) {
         ctx = context;
-        String nhMessage = bundle.getString("message");
+        this.notificationID = getID(ctx, bundle);
+        this.notificationAuth = authNeeded(ctx, bundle);
+        String nhMessage;
+
+        if (notificationAuth) {
+            nhMessage = "Authorization has been requested by " + notificationID;
+        } else {
+            nhMessage = notificationID + " has requested access";
+        }
         sendNotification(nhMessage);
+
         if (MainActivity.isVisible) {
+            MainActivity.mainActivity.setVariables(notificationID,notificationAuth);
             MainActivity.mainActivity.ToastNotify(nhMessage);
         }
     }
@@ -49,13 +65,64 @@ public class CustomNotificationHandler extends NotificationsHandler {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(ctx)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Notification Hub Demo")
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
+                        .setContentTitle("AutoTAG Notification Hub")
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                         .setSound(defaultSoundUri)
-                        .setContentText(msg);
+                        .setContentText(msg)
+                        .setOngoing(true);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
+    }
+
+    /*
+    * Method to determine if notification is authorizing type
+    * Returns 'TRUE' for authorization notification
+    * Returns 'FALSE' for notification only
+    */
+    private boolean authNeeded(Context context, Bundle bundle) {
+        ctx = context;
+
+        Log.i(TAG, "Retrieving notification type");
+
+        try {
+            String type = bundle.getString("type");
+            int auth = Integer.parseInt(type);
+            if (auth == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to get notification type", e);
+        }
+
+        return false;
+    }
+
+
+    /*
+    * Method to retrieve the RFID registration ID
+    */
+    private String getID(Context context, Bundle bundle) {
+        ctx = context;
+
+        String ID = null;
+        Log.i(TAG, "Retrieving ID");
+
+        try {
+            ID = bundle.getString("id");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to retrieve ID", e);
+        }
+        return ID;
+    }
+
+
+    public boolean getAuthNeeded(){
+        return this.notificationAuth;
+    }
+
+    public String getID() {
+        return this.notificationID;
     }
 }
