@@ -21,12 +21,10 @@ import au.uni.melb.rfid.notifier.activity.MainActivity;
 
 public class CustomNotificationHandler extends NotificationsHandler {
 
-    private static final String TAG = "CustomNotificationHandler";
-
     public static final int NOTIFICATION_ID = 1;
-    private NotificationManager mNotificationManager;
+    private static final String TAG = "Handler";
     Context ctx;
-
+    private NotificationManager mNotificationManager;
     private boolean notificationAuth;
     private String notificationID;
 
@@ -83,9 +81,6 @@ public class CustomNotificationHandler extends NotificationsHandler {
     */
     private boolean authNeeded(Context context, Bundle bundle) {
         ctx = context;
-
-        Log.i(TAG, "Retrieving notification type");
-
         try {
             String type = bundle.getString("type");
             int auth = Integer.parseInt(type);
@@ -93,7 +88,7 @@ public class CustomNotificationHandler extends NotificationsHandler {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG, "Failed to get notification type", e);
+            Log.e(TAG, e.getMessage());
         }
 
         return false;
@@ -107,12 +102,11 @@ public class CustomNotificationHandler extends NotificationsHandler {
         ctx = context;
 
         String ID = null;
-        Log.i(TAG, "Retrieving ID");
 
         try {
             ID = bundle.getString("id");
         } catch (Exception e) {
-            Log.e(TAG, "Failed to retrieve ID", e);
+            Log.e(TAG, e.getMessage());
         }
         return ID;
     }
