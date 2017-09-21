@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mainActivity = this;
-        NotificationsManager.handleNotifications(this, NotificationSettings.dispSenderID, CustomNotificationHandler.class);
+        NotificationsManager.handleNotifications(this, NotificationSettings.SenderID, CustomNotificationHandler.class);
         registerWithNotificationHubs();
 
         Log.d(TAG, "Welcome to AutoTAG");

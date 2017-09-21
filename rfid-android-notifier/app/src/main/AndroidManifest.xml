@@ -55,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity android:name="au.uni.melb.rfid.notifier.activity.AuthorizationActivity" />
-        <activity android:name="au.uni.melb.rfid.notifier.activity.DisplayActivity"></activity>
+        <activity android:name="au.uni.melb.rfid.notifier.activity.DisplayActivity" />
     </application>
 
 </manifest>

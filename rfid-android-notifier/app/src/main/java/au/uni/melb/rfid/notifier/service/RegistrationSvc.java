@@ -27,11 +27,11 @@ public class RegistrationSvc extends IntentService {
         super(TAG);
     }
 
-    private final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String resultString;
         String regID;
 
