@@ -109,13 +109,8 @@ public class AutoTagActivity extends AppCompatActivity {
         AutoTag autoTag = new AutoTag();
         autoTag.setAuthorized(false);
         autoTag.setId(tvAutoTagId.getText().toString());
-        try {
-            autoTagTable.insert(autoTag);
-        }catch( ExecutionException e){
+        autoTagTable.insert(autoTag);
 
-        }catch (InterruptedException e){
-
-        }
         tvAutoTagId.setText("");
     }
 
