@@ -1,28 +1,19 @@
-package com.mayi.rfid.nfcrfidreader;
+package au.uni.melb.rfid.nfc;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.microsoft.windowsazure.mobileservices.*;
+
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
-import java.net.MalformedURLException;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
 public class AutoTagActivity extends AppCompatActivity {
 

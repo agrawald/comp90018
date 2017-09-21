@@ -1,21 +1,21 @@
-package com.mayi.rfid.nfcrfidreader;
+package au.uni.melb.rfid.nfc;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Ao Li on 21/9/17.
  */
-
 public class AutoTag {
-
     /**
      * AutoTag Id
      */
-    @com.google.gson.annotations.SerializedName("id")
+    @SerializedName("id")
     private String autoTagId;
 
     /**
      * AutoTag authorized
      */
-    @com.google.gson.annotations.SerializedName("authorized")
+    @SerializedName("authorized")
     private Boolean authorized;
 
 
@@ -29,8 +29,7 @@ public class AutoTag {
     /**
      * Sets the autoTag id
      *
-     * @param id
-     *            id to set
+     * @param id id to set
      */
     public void setId(String id) {
         autoTagId = id;
