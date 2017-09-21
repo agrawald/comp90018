@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "51158287557",
+    "firebase_url": "https://autotag-179810.firebaseio.com",
+    "project_id": "autotag-179810",
+    "storage_bucket": "autotag-179810.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51158287557:android:7ec5e2e20648f4e9",
+        "android_client_info": {
+          "package_name": "lilian.rfid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51158287557-ip6osntnbnosi6m1dpdm04gr50nr579t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd8DNTm7IYCECI83jAuk7uUvQfK5o7uyM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
