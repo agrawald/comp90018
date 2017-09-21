@@ -1,7 +1,7 @@
 namespace NFCConnectionService.Migrations
 {
     using Microsoft.Azure.Mobile.Server.Tables;
-    using nfcConnectionService.DataObjects;
+    using NFCConnectionService.DataObjects;
     using System;
     using System.Data.Entity;
     using System.Collections.Generic;
@@ -19,17 +19,6 @@ namespace NFCConnectionService.Migrations
         protected override void Seed(NFCConnectionService.Models.NFCConnectionContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
 
              List<AutoTag>  autoTags = new List<AutoTag>
              {

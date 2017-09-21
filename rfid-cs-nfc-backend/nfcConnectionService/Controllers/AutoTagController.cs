@@ -4,8 +4,8 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
-using nfcConnectionService.DataObjects;
-using nfcConnectionService.Models;
+using NFCConnectionService.DataObjects;
+using NFCConnectionService.Models;
 
 
 namespace NFCConnectionService.Controllers
@@ -15,7 +15,7 @@ namespace NFCConnectionService.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            nfcConnectionContext context = new nfcConnectionContext();
+            NFCConnectionContext context = new NFCConnectionContext();
             DomainManager = new EntityDomainManager<AutoTag>(context, Request);
         }
 

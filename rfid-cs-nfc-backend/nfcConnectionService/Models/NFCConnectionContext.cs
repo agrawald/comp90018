@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
-using nfcConnectionService.DataObjects;
+using NFCConnectionService.DataObjects;
 
 namespace NFCConnectionService.Models
 {
