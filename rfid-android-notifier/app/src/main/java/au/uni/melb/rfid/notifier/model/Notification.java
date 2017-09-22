@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Notification {
     @SerializedName("id")
-    public String ncfId;
+    public String mId;
     @SerializedName("text")
-    public String ncfText;
+    public String mText;
     @SerializedName("complete")
-    private boolean ncfComplete;
+    private boolean mComplete;
 
     public Notification() {
 
@@ -23,12 +23,12 @@ public class Notification {
     /**
      * Initializes a new Notification
      *
-     * @param ncfText The item text
-     * @param ncfId   The item id
+     * @param mText The item text
+     * @param mId   The item id
      */
-    public Notification(String ncfText, String ncfId) {
-        this.setText(ncfText);
-        this.setId(ncfId);
+    public Notification(String mText, String mId) {
+        this.setText(mText);
+        this.setId(mId);
         this.setComplete(false);
     }
 
@@ -36,7 +36,7 @@ public class Notification {
      * Returns the item text
      */
     public String getText() {
-        return ncfText;
+        return mText;
     }
 
     /**
@@ -45,14 +45,14 @@ public class Notification {
      * @param text text to set
      */
     public final void setText(String text) {
-        ncfText = text;
+        mText = text;
     }
 
     /**
      * Returns the item id
      */
     public String getId() {
-        return ncfId;
+        return mId;
     }
 
     /**
@@ -61,25 +61,25 @@ public class Notification {
      * @param id id to set
      */
     public final void setId(String id) {
-        ncfId = id;
+        mId = id;
     }
 
     /**
      * Indicates if the item is marked as completed
      */
     public boolean isComplete() {
-        return ncfComplete;
+        return mComplete;
     }
 
     /**
      * Marks the item as completed or incompleted
      */
     public void setComplete(boolean complete) {
-        ncfComplete = complete;
+        mComplete = complete;
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Notification && ((Notification) o).ncfId == ncfId;
+        return o instanceof Notification && ((Notification) o).mId == mId;
     }
 }

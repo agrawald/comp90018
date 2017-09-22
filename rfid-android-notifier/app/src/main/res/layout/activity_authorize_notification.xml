@@ -67,7 +67,7 @@
             android:text="@string/confirm" />
 
         <Button
-            android:id="@+id/dismissButton"
+            android:id="@+id/denyButton"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/confirmButton"
