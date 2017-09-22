@@ -10,5 +10,5 @@ public interface NotificationSettings {
     String HubName = "displayHub";
     String HubListenConnectionString =
             "Endpoint=sb://displayhub.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=gjtqKDTnYiyoHFklFYm8Xdy0jHXktRbrH2JOCbsgJbU=";
-    
+
 }
