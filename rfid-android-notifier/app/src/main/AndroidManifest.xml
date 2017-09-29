@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="au.uni.melb.rfid.notifier">
+    package="rfid.melb.uni.au.activity">
 
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="comp90018.autotag.permission.C2D_MESSAGE"
+        android:name="rfid.melb.uni.au.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
-    <uses-permission android:name="comp90018.autotag.permission.C2D_MESSAGE" />
+    <uses-permission android:name="rfid.melb.uni.au.permission.C2D_MESSAGE" />
 
     <application
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="AutoTAG"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:label,android:icon">
+        android:theme="@style/Theme.AppCompat.Translucent"
+        tools:replace="icon">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service
-            android:name=".service.InstanceIDSvc"
-            android:exported="false">
+        <activity android:name="rfid.melb.uni.au.activity.NotifierActivity">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </service>
-        <service
-            android:name=".service.RegistrationSvc"
-            android:exported="false" />
+        </activity>
+
 
         <receiver
             android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="comp90018.autotag" />
+                <category android:name="rfid.melb.uni.au" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.MainActivity">
+        <service
+            android:name="rfid.melb.uni.au.service.InstanceIdSvc"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.package.name.comp90018.autotag" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.AuthorizationActivity" />
-        <activity android:name=".activity.DisplayActivity" />
+        </service>
+        <service
+            android:name="rfid.melb.uni.au.service.RegistrationIntentService"
+            android:exported="false"></service>
+
     </application>
 
 </manifest>

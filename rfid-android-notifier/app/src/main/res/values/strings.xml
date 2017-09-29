@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">AutoTAG</string>
-    <string name="authorizeText">A new user has requested access:</string>
-    <string name="confirm">Confirm</string>
-    <string name="userid">UserID:</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="displayText">Access has been requested by a registered user:</string>
+    <string name="app_name">rfid-android-notifier</string>
+    <string name="dialog_display_message">%s granted access.</string>
+    <string name="dialog_authorize_message">%s request an access.</string>
+    <string name="dialog_display_title">Notification</string>
+    <string name="dialog_authorize_title">Authorization Request</string>
+    <string name="dialog_install_title">Notifiation</string>
+    <string name="text_notification">Emergency Access Request</string>
     <string name="ok">OK</string>
-    <string name="title">Welcome to AutoTAG!</string>
-    <string name="deny">Deny</string>
-    <string name="checkbox_text"></string>
+    <string name="dismiss">Dismiss</string>
+    <string name="approve">Approve</string>
 </resources>
