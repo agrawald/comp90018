@@ -42,7 +42,9 @@ public class NotifierActivity extends AppCompatActivity {
             this.finish();
         }
 
-        this.showInstallDialog();
+        if (this.getIntent().getExtras() == null) {
+            this.showInstallDialog();
+        }
     }
 
     public void showDialog(Bundle mainBundle) {
