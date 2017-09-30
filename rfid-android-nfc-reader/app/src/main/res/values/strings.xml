@@ -3,4 +3,11 @@
     <string name="explanation">Test</string>
     <string name="service_title">NFC Recoginization </string>
     <string name="add_button_text">Add</string>
+
+    <string name="dialog_authorize_title">Authorization Options</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="not_authorized">Not Authorized</string>
+    <string name="authorized">Authorized</string>
+    <string name="button_authorized_toggle">ToggleButton</string>
 </resources>

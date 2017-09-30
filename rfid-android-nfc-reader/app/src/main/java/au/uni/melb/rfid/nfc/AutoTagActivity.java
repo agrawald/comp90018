@@ -1,98 +1,62 @@
 package au.uni.melb.rfid.nfc;
 
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.nfc.NfcAdapter;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
-import com.microsoft.windowsazure.mobileservices.*;
-import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
+import au.uni.melb.rfid.nfc.common.AzureServiceAdapter;
+import au.uni.melb.rfid.nfc.dao.RfidAuthDao;
+import au.uni.melb.rfid.nfc.model.Payload;
+import au.uni.melb.rfid.nfc.service.NfcSensorSvc;
+
 public class AutoTagActivity extends AppCompatActivity {
-
-    /**
-     * Transfer NCF data into database
-     */
-    private MobileServiceClient autoTagNFCClient;
-    private MobileServiceTable<AutoTag> autoTagTable;
-
-    private NfcAdapter nfcAdapter;
-    TextView tvAutoTagId;
-    TextView tvAutoTagAuthorized;
+    private final static String TAG = AutoTagActivity.class.getSimpleName();
+    public static AutoTagActivity instance;
+    private TextView tvTagId;
+    private ToggleButton tbAuthorized;
+    private Button btnAdd;
+    private RfidAuthDao rfidAuthDao;
+    private NfcSensorSvc nfcSensorSvc;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (nfcAdapter == null) {
-            Toast.makeText(this,
-                    "NFC NOT supported on this devices!",
-                    Toast.LENGTH_LONG).show();
-            finish();
-        } else if (!nfcAdapter.isEnabled()) {
-            Toast.makeText(this,
-                    "NFC NOT Enabled!",
-                    Toast.LENGTH_LONG).show();
-            finish();
-        }
-
+        instance = this;
         try {
-            autoTagNFCClient = new MobileServiceClient(
-                    "https://nfcconnection.azurewebsites.net",
-                    this);
-            autoTagTable = autoTagNFCClient.getTable(AutoTag.class);
-        } catch (Exception e) {
-            createAndShowDialog(e, "Error");
+            AzureServiceAdapter.init(this.getApplicationContext());
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "Unable to register with the azure backend service", e);
+            this.finish();
         }
-        tvAutoTagId = (TextView) findViewById(R.id.tvAutoTagId);
-        tvAutoTagAuthorized = (TextView) findViewById(R.id.tvAutoTagAuthorized);
+        rfidAuthDao = new RfidAuthDao();
+        nfcSensorSvc = new NfcSensorSvc();
+
+        setContentView(R.layout.activity_main);
+        tvTagId = (TextView) findViewById(R.id.tvTagId);
+        tbAuthorized = (ToggleButton) findViewById(R.id.tbAuthorized);
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        Intent intent = getIntent();
-        String action = intent.getAction();
-
-        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
-            Toast.makeText(this,
-                    "onResume() - ACTION_TAG_DISCOVERED",
-                    Toast.LENGTH_SHORT).show();
-
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            if (tag == null) {
-                tvAutoTagId.setText("tag == null");
-            } else {
-                int i, j, in;
-                String[] hex = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
-                String tagIdInfo = "";
-                String tagTextInfo = "";
-                byte[] tagId = tag.getId();
-                tagTextInfo += tagId.length;
-
-                for (j = 0; j < tagId.length; ++j) {
-                    in = (int) tagId[j] & 0xff;
-                    i = (in >> 4) & 0x0f;
-                    tagIdInfo += hex[i];
-                    i = in & 0x0f;
-                    tagIdInfo += hex[i];
-                }
-                tvAutoTagId.setText(tagIdInfo);
-            }
-        } else {
-            Toast.makeText(this,
-                    "onResume() : " + action,
-                    Toast.LENGTH_SHORT).show();
+        final String tagId = nfcSensorSvc.read();
+        if (tagId != null && tagId.trim().length() > 0) {
+            tvTagId.setText(tagId);
+            btnAdd.setEnabled(true);
         }
     }
 
@@ -101,62 +65,13 @@ public class AutoTagActivity extends AppCompatActivity {
      *
      * @param view The view that originated the call
      */
-    public void addItem(View view) {
-        if (autoTagNFCClient == null) {
-            return;
-        }
-
+    public void addItem(View view) throws InterruptedException, ExecutionException, MobileServiceException {
+        spinner.setVisibility(View.VISIBLE);
         // Create a new item
-        AutoTag autoTag = new AutoTag();
-        autoTag.setAuthorized(false);
-        autoTag.setId(tvAutoTagId.getText().toString());
-        autoTagTable.insert(autoTag);
-
-        tvAutoTagId.setText("");
-    }
-
-
-    /**
-     * Creates a dialog and shows it
-     *
-     * @param exception The exception to show in the dialog
-     * @param title     The dialog title
-     */
-    private void createAndShowDialogFromTask(final Exception exception, String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, "Error");
-            }
-        });
-    }
-
-
-    /**
-     * Creates a dialog and shows it
-     *
-     * @param exception The exception to show in the dialog
-     * @param title     The dialog title
-     */
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    /**
-     * Creates a dialog and shows it
-     *
-     * @param message The dialog message
-     * @param title   The dialog title
-     */
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
+        rfidAuthDao.saveOrUpdate(new Payload(tvTagId.getText().toString(), tbAuthorized.isChecked()));
+        spinner.setVisibility(View.INVISIBLE);
+        Toast.makeText(this, "Tag is uploaded to the authorization store.", Toast.LENGTH_LONG).show();
+        tvTagId.setText("");
+        btnAdd.setEnabled(false);
     }
 }
