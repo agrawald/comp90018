@@ -12,13 +12,14 @@ import com.microsoft.windowsazure.messaging.NotificationHub;
 
 import rfid.melb.uni.au.common.CloudConfig;
 
-public class RegistrationIntentService extends IntentService {
+/**
+ * Service class to register with Google notification hub.
+ */
+public class RegistrationIntentSvc extends IntentService {
 
     private static final String TAG = "RegIntentService";
 
-    private NotificationHub hub;
-
-    public RegistrationIntentService() {
+    public RegistrationIntentSvc() {
         super(TAG);
     }
 
@@ -42,11 +43,6 @@ public class RegistrationIntentService extends IntentService {
                 Log.i(TAG, "Attempting to register with NH using token : " + token);
 
                 regID = hub.register(token).getRegistrationId();
-
-                // If you want to use tags...
-                // Refer to : https://azure.microsoft.com/en-us/documentation/articles/notification-hubs-routing-tag-expressions/
-                // regID = hub.register(token, "tag1", "tag2").getRegistrationId();
-
                 Log.i(TAG, "Registered Successfully - RegId : " + regID);
                 sharedPreferences.edit().putString("registrationID", regID).apply();
             } else {
@@ -54,13 +50,6 @@ public class RegistrationIntentService extends IntentService {
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
         }
-
-//        // Notify UI that registration has completed.
-//        if (MainActivity.isVisible) {
-//            MainActivity.instance.ToastNotify(resultString);
-//        }
     }
 }

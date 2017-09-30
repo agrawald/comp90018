@@ -55,7 +55,7 @@
             </intent-filter>
         </service>
         <service
-            android:name="rfid.melb.uni.au.service.RegistrationIntentService"
+            android:name="rfid.melb.uni.au.service.RegistrationIntentSvc"
             android:exported="false"></service>
 
     </application>

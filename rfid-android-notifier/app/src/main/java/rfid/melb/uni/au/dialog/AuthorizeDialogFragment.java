@@ -9,16 +9,17 @@ import android.util.Log;
 
 import rfid.melb.uni.au.activity.NotifierActivity;
 import rfid.melb.uni.au.activity.R;
-import rfid.melb.uni.au.dao.RfidAuthDao;
+import rfid.melb.uni.au.dao.InsertRfidDao;
+import rfid.melb.uni.au.dao.NotificationDao;
 import rfid.melb.uni.au.model.Payload;
 
 /**
- * Created by dagrawal on 24-Sep-17.
+ * {@link android.support.v4.app.DialogFragment} to represent a authroization request
+ * Created by Dheeraj Agrawal (agrawald@student.unimelb.edu.au) on 24-Sep-17.
  */
 
 public class AuthorizeDialogFragment extends DialogFragment {
     private final static String TAG = AuthorizeDialogFragment.class.getSimpleName();
-    private final static RfidAuthDao rfidAuthDao = new RfidAuthDao();
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
@@ -34,18 +35,24 @@ public class AuthorizeDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    private static class DialogOnClickListener implements DialogInterface.OnClickListener {
+    private class DialogOnClickListener implements DialogInterface.OnClickListener {
         private final Bundle bundle;
+        private final InsertRfidDao insertRfidDao;
+        private final NotificationDao notificationDao;
 
         private DialogOnClickListener(Bundle bundle) {
             this.bundle = bundle;
+            insertRfidDao = new InsertRfidDao();
+            notificationDao = new NotificationDao();
         }
 
         @Override
         public void onClick(DialogInterface dialog, int id) {
             // send to azure
             try {
-                rfidAuthDao.saveOrUpdate(new Payload(bundle.getString("id"), true));
+                final Payload payload = new Payload(bundle.getString("id"), id == -1);
+                insertRfidDao.execute(payload).get();
+                notificationDao.execute(payload).get();
             } catch (Exception e) {
                 Log.e(TAG, "Unable to save or update RFID", e);
             } finally {

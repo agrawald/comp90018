@@ -15,11 +15,11 @@ import rfid.melb.uni.au.activity.NotifierActivity;
 import rfid.melb.uni.au.activity.R;
 
 /**
- * Created by dagrawal on 24-Sep-17.
+ * {@link NotificationsHandler} to process all the notification messages received
+ * Created by Dheeraj Agrawal (agrawald@student.unimelb.edu.au) on 24-Sep-17.
  */
-
 public class NotificationHandler extends NotificationsHandler {
-    public static final int NOTIFICATION_ID = 1;
+    private static final int NOTIFICATION_ID = 1;
 
     @Override
     public void onReceive(Context ctx, Bundle bundle) {

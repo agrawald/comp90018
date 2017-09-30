@@ -10,7 +10,8 @@ import android.util.Log;
 import rfid.melb.uni.au.activity.R;
 
 /**
- * Created by dagrawal on 24-Sep-17.
+ * {@link android.support.v4.app.DialogFragment} to represent a display notification
+ * Created by Dheeraj Agrawal (agrawald@student.unimelb.edu.au) on 24-Sep-17.
  */
 
 public class DisplayDialogFragment extends DialogFragment {

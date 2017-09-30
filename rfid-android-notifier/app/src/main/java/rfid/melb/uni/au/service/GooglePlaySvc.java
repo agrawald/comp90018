@@ -11,9 +11,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import static android.content.ContentValues.TAG;
 
 /**
+ * Service class to register this application with Google Cloud Messaging
  * Created by dagrawal on 24-Sep-17.
  */
-
 public class GooglePlaySvc {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private final Activity parent;
@@ -49,7 +49,7 @@ public class GooglePlaySvc {
 
         if (check()) {
             // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(parent, RegistrationIntentService.class);
+            Intent intent = new Intent(parent, RegistrationIntentSvc.class);
             parent.startService(intent);
         }
     }

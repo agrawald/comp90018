@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.widget.Toast;
 
 /**
+ * Service to show toast on a seperate ui thread
  * Created by dagrawal on 24-Sep-17.
  */
-
 public class ToastSvc implements Runnable {
     private final Activity parent;
     private final String message;

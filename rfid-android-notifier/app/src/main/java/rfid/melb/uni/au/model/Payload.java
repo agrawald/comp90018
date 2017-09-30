@@ -3,9 +3,9 @@ package rfid.melb.uni.au.model;
 import com.microsoft.windowsazure.mobileservices.table.DateTimeOffset;
 
 /**
+ * Model class to represent a Payload
  * Created by dagrawal on 29-Sep-17.
  */
-
 public class Payload {
     @com.google.gson.annotations.SerializedName("Id")
     private String id;
@@ -94,5 +94,17 @@ public class Payload {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Payload{" +
+                "id='" + id + '\'' +
+                ", authorized=" + authorized +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", version='" + version + '\'' +
+                ", deleted=" + deleted +
+                '}';
     }
 }
