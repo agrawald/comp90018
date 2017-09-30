@@ -3,9 +3,9 @@ package au.uni.melb.rfid.nfc.model;
 import com.microsoft.windowsazure.mobileservices.table.DateTimeOffset;
 
 /**
+ * Entity class to represent an instance of rfidAuth record
  * Created by dagrawal on 29-Sep-17.
  */
-
 public class Payload {
     @com.google.gson.annotations.SerializedName("Id")
     private String id;

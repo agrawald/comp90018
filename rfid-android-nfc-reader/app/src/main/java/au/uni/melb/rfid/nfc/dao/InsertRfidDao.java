@@ -9,9 +9,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import au.uni.melb.rfid.nfc.common.AzureServiceAdapter;
+import au.uni.melb.rfid.nfc.common.CloudConfig;
 import au.uni.melb.rfid.nfc.model.Payload;
 
 /**
+ * Data Access object to Insert a record from rfidAuth table
  * Created by dagrawal on 30-Sep-17.
  */
 
@@ -20,7 +22,7 @@ public class InsertRfidDao extends AsyncTask<Payload, Void, Payload> {
     private final MobileServiceTable<Payload> rfidTable;
 
     public InsertRfidDao() {
-        this.rfidTable = AzureServiceAdapter.getInstance().getTable("Rfid");
+        this.rfidTable = AzureServiceAdapter.getInstance().getTable(CloudConfig.RFIDAUTH_RESOURCE);
     }
 
     @Override

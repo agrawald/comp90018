@@ -18,12 +18,15 @@ import android.widget.ToggleButton;
 import java.net.MalformedURLException;
 
 import au.uni.melb.rfid.nfc.common.AzureServiceAdapter;
+import au.uni.melb.rfid.nfc.common.CloudConfig;
 import au.uni.melb.rfid.nfc.dao.InsertRfidDao;
 import au.uni.melb.rfid.nfc.model.Payload;
 
+/**
+ * Main activity to start the application
+ */
 public class AutoTagActivity extends AppCompatActivity {
     private final static String TAG = AutoTagActivity.class.getSimpleName();
-    private final static String[] HEX = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
     public static AutoTagActivity instance;
     private TextView tvTagId;
     private ToggleButton tbAuthorized;
@@ -97,9 +100,9 @@ public class AutoTagActivity extends AppCompatActivity {
             for (j = 0; j < tagId.length; ++j) {
                 in = (int) tagId[j] & 0xff;
                 i = (in >> 4) & 0x0f;
-                tagIdInfo += HEX[i];
+                tagIdInfo += CloudConfig.HEX[i];
                 i = in & 0x0f;
-                tagIdInfo += HEX[i];
+                tagIdInfo += CloudConfig.HEX[i];
             }
 
             tvTagId.setText(tagIdInfo);
