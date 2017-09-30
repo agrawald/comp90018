@@ -10,8 +10,3 @@ When an RFID tag is scanner on the RFID reader, this application will parse the 
 - Azure
 - Gradle
 - Java
-
-## todo
-- Implement logic to read RFID RC522 reader data
-- Logic to send the data to Azure 
-- Logic to read the response received by Azure.
