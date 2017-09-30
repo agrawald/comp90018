@@ -14,15 +14,11 @@ namespace rfidBackendAndroidService.Controllers
 {
     public class RfidController : TableController<Payload>
     {
-        static string connectionString = "HostName=iotHubRFID.azure-devices.net;DeviceId=rfid_raspberry_pi;SharedAccessKey=W3r5MdNny6SIgcTveH2ec2JZtWAO6WhXg6yh9Bp6+9M=";
-        static ServiceClient serviceClient;
-
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
             rfidBackendAndroidContext context = new rfidBackendAndroidContext();
             DomainManager = new EntityDomainManager<Payload>(context, Request);
-            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
         }
 
         // GET tables/Rfid
@@ -47,9 +43,6 @@ namespace rfidBackendAndroidService.Controllers
         public async Task<IHttpActionResult> PostRfid(Payload item)
         {
             Payload current = await InsertAsync(item);
-            //var json = JsonConvert.SerializeObject(current);
-            //var commandMessage = new Message(Encoding.ASCII.GetBytes(json));
-            //await serviceClient.SendAsync("rfid_raspberry_pi", commandMessage);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
