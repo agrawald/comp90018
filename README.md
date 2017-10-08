@@ -25,4 +25,7 @@ This application will be used to read the RFID tag using RC522 sensor and send t
 ## rfid-web-locator
 This application will provide a web UI to locate and track RFID tags.
 
+## documents
+This folder has some design documents (including the flowchart and cloud compoenet diagram) and our user survey questionnair 
+
 
