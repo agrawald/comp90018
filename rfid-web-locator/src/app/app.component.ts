@@ -1,8 +1,11 @@
-import {AfterContentInit, Component, ViewChild} from '@angular/core';
-import {SensorService} from './services/sensor.service';
-import {Sensor} from './model/sensor';
-import {AgmMap} from '@agm/core';
+import {AfterContentInit, Component, ViewChild} from "@angular/core";
+import {SensorService} from "./services/sensor.service";
+import {Sensor} from "./model/sensor";
+import {AgmMap} from "@agm/core";
 
+/**
+ * Main Application component to provide the master container for all the other compoenents
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -21,13 +24,19 @@ export class AppComponent implements AfterContentInit {
 
   OnMapReady($event) {
     this.initCurrentLocation();
+    //Lest find all the sensor data as soon as map is available
     this.sensorSvc.findAll().subscribe(data => this.sensors = data);
   }
 
   ngAfterContentInit(): void {
+    //we need to reposition when new content is identified
     this.repositionMap();
   }
 
+  /**
+   * This method will get the current position of the machine on which the application is running
+   * using browser location service and display it on the map
+   */
   initCurrentLocation(): void {
     if (window.navigator && window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
@@ -64,6 +73,10 @@ export class AppComponent implements AfterContentInit {
     document.getElementById('map-wrapper').style.backgroundColor = 'white';
   }
 
+  /**
+   * When user performs a search for a specific RFID this method will be called to fulfill the request
+   * @param form the form data which contains the RFID
+   */
   submitForm(form: any): void {
     if (form.rfid) {
       this.sensorSvc.findAllFor(form.rfid).subscribe(data => {
@@ -78,6 +91,9 @@ export class AppComponent implements AfterContentInit {
     }
   }
 
+  /**
+   * Function to reposition map after we are done plotting the coordinates
+   */
   private repositionMap() {
     if (this.geolocationPosition) {
       this.agmMap.latitude = this.geolocationPosition.coords.latitude;

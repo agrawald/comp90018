@@ -49,23 +49,27 @@ public class AutoTagActivity extends AppCompatActivity {
         }
         insertRfidDao = new InsertRfidDao();
 
+        //lets initialize the NFC adapter
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(AutoTagActivity.instance);
-        if (nfcAdapter == null) {
+        if (nfcAdapter == null) { //NFC not available
             Toast.makeText(AutoTagActivity.instance,
                     "NFC NOT supported on this devices!",
                     Toast.LENGTH_LONG).show();
             AutoTagActivity.instance.finish();
-        } else if (!nfcAdapter.isEnabled()) {
+        } else if (!nfcAdapter.isEnabled()) { // NFC not enabled
             Toast.makeText(AutoTagActivity.instance,
                     "NFC NOT Enabled!",
                     Toast.LENGTH_LONG).show();
             AutoTagActivity.instance.finish();
         }
+
+        //some house keeping
         setContentView(R.layout.activity_main);
         tvTagId = (TextView) findViewById(R.id.tvTagId);
         tbAuthorized = (ToggleButton) findViewById(R.id.tbAuthorized);
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
+        //now start the intent to keep reading NFC contact information
         pendingIntent = PendingIntent.getActivity(
                 this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -80,16 +84,26 @@ public class AutoTagActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Disable the forground dispatcher when the activity pause
+     */
     public void onPause() {
         super.onPause();
         nfcAdapter.disableForegroundDispatch(this);
     }
 
+    /**
+     * When resumed bring the activity to front
+     */
     public void onResume() {
         super.onResume();
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFiltersArray, techListsArray);
     }
 
+    /**
+     * When new intent read the NFC card
+     * @param intent
+     */
     public void onNewIntent(Intent intent) {
         Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         //do something with tagFromIntent

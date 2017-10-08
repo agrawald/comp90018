@@ -35,6 +35,9 @@ public class AuthorizeDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * Listener class to implement OnClickListener
+     */
     private class DialogOnClickListener implements DialogInterface.OnClickListener {
         private final Bundle bundle;
         private final InsertRfidDao insertRfidDao;
@@ -51,7 +54,9 @@ public class AuthorizeDialogFragment extends DialogFragment {
             // send to azure
             try {
                 final Payload payload = new Payload(bundle.getString("id"), id == -1);
+                //lets insert the new record
                 insertRfidDao.execute(payload).get();
+                //lets notify the IOT hub which will inturn send message to device.
                 notificationDao.execute(payload).get();
             } catch (Exception e) {
                 Log.e(TAG, "Unable to save or update RFID", e);

@@ -1,10 +1,14 @@
-import {Injectable} from '@angular/core';
-import {Sensor} from '../model/sensor';
-import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import {environment} from '../../environments/environment';
+import {Injectable} from "@angular/core";
+import {Sensor} from "../model/sensor";
+import {Headers, Http, RequestOptions, URLSearchParams} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import {environment} from "../../environments/environment";
 
+/**
+ * Function to add all the required parameter to be sent with every request made to Azure Storage account API.
+ * @returns {any}
+ */
 function getParams() {
   const params = new URLSearchParams();
   const sas = environment.sas;
@@ -13,25 +17,40 @@ function getParams() {
   return params;
 }
 
+/**
+ * Function to generate the request header with common stuff
+ * @returns {any}
+ */
 function getHeaders() {
   const headers = new Headers();
   headers.set('Accept', 'application/json');
   return headers;
 }
 
+/**
+ * Function to generate request options
+ * @returns {any}
+ */
 function getOptions() {
   const options = new RequestOptions({headers: getHeaders()});
   options.params = getParams();
   return options;
 }
 
-
+/**
+ * Sensor Service which will make the REST API call to the Azure Storage Account API to fetch the data
+ */
 @Injectable()
 export class SensorService {
 
   constructor(private http: Http) {
   }
 
+  /**
+   * Function to find all the data from the Azure Storage Account from RFIDAUTH table
+   * @returns {Uint32Array|Uint8Array|Uint16Array|Int8Array|(Uint32Array|Uint8Array|Uint16Array|I
+   * nt8Array|Sensor[]|Int32Array|any)[]|Int32Array|any}
+   */
   findAll(): Observable<Sensor[]> {
     const sensors$ = this.http
       .get(`${environment.baseUrl}`, getOptions())
@@ -42,6 +61,12 @@ export class SensorService {
     return sensors$;
   }
 
+  /**
+   * Function to find all the record satisfying the search criteria provided
+   * @param rfid
+   * @returns {Uint32Array|Uint8Array|Uint16Array|Int8Array|(Uint32Array|Uint8Array|Uint16Array|
+   * Int8Array|Sensor[]|Int32Array|any)[]|Int32Array|any}
+   */
   findAllFor(rfid: string): Observable<Sensor[]> {
     const options = getOptions();
     options.params.set('$filter', 'id eq \'' + rfid + '\'');
@@ -54,6 +79,11 @@ export class SensorService {
     return sensor$;
   }
 
+  /**
+   * Function to convert the JSON record into Sensor data object
+   * @param record
+   * @returns {Sensor}
+   */
   toSensor(record: any): Sensor {
     const message = JSON.parse(record.message)[0];
     const sensor = new Sensor();
@@ -67,42 +97,7 @@ export class SensorService {
         sensor.data.location.lat = message.data.location.lat;
       }
     }
-    console.log('Parsed person:', sensor);
+    console.log('Parsed sensor:', sensor);
     return sensor;
   }
 }
-
-
-const SENSORS: Sensor[] = [
-  {
-    id: '0ed06a7b',
-    deviceId: 'RFID Raspberry Pi Node',
-    data: {
-      temperature: 23.932926196139306, humidity: 61.26553820911795, location: {
-        lat: -33.86785, lng: 151.20732
-      }
-    }
-  },
-  {
-    id: '0ed06a7b',
-    deviceId: 'RFID Raspberry Pi Node',
-    data: {
-      temperature: 23.932926196139306, humidity: 61.26553820911795, location: {
-        lat: -42.87936, lng: 147.32941
-      }
-    }
-  },
-  {
-    id: '0ed06a7b',
-    deviceId: 'RFID Raspberry Pi Node',
-    data: {
-      temperature: 23.932926196139306,
-      humidity: 61.26553820911795,
-      location: {
-        lat: -37.814251,
-        lng: 144.963169
-      }
-    }
-  },
-];
-
