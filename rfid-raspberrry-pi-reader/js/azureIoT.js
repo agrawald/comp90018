@@ -43,7 +43,7 @@ AzureIoT.prototype.initClient = function () {
 
     client.open((err) => {
         if (err) {
-            console.error('[IoT hub Client] Connect error: ' + err.message);
+            console.error('[IoT hub Client] Connect error: ', err);
         }
 
         // set C2D and device method callback
@@ -78,7 +78,7 @@ function onStart(request, response) {
     console.log('Try to invoke method start(' + request.payload || '' + ')');
     response.send(200, 'Successully start sending message to cloud', function (err) {
         if (err) {
-            console.error('[IoT hub Client] Failed sending a method response:\n' + err.message);
+            console.error('[IoT hub Client] Failed sending a method response:\n' + err.message, err);
         }
     });
 }
@@ -93,7 +93,7 @@ function onStop(request, response) {
 
     response.send(200, 'Successfully stop sending message to cloud', function (err) {
         if (err) {
-            console.error('[IoT hub Client] Failed sending a method response:\n' + err.message);
+            console.error('[IoT hub Client] Failed sending a method response:\n' + err.message, err);
         }
     });
 }
